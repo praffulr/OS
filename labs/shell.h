@@ -17,6 +17,10 @@ struct shellstate_t
 	char command[10];
 	char arguments[10][10];
 	int input_ctr, init_flag;
+	//0 -> normal mode
+	//1 -> coroutine mode
+	//2 -> fiber mode
+	short mode;
 };
 
 struct renderstate_t
@@ -27,6 +31,11 @@ struct renderstate_t
 	int line, column, num_keys;
 	uint8_t enable_output;//if(enable[i]==true) qualified for output on vga screen
 	int init_flag;
+	//0 -> normal mode
+	//1 -> coroutine mode
+	//2 -> fiber mode
+	short mode;
+	// uint32_t presses_in_c_mode; //number of presses in c_mode
 };
 
 void shell_init(shellstate_t& state);

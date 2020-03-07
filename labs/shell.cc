@@ -1,7 +1,6 @@
 #include "labs/shell.h"
 #include "labs/vgatext.h"
 
-
 // ------------------------ Helper function ----------------------//
 static void fillrect(int x0, int y0, int x1, int y1, uint8_t bg, uint8_t fg, int w, int h, addr_t vgatext_base);
 static void drawrect(int x0, int y0, int x1, int y1, uint8_t bg, uint8_t fg, int w, int h, addr_t vgatext_base);
@@ -36,6 +35,7 @@ void shell_init(shellstate_t& state){
 	state.num_keys = 0;
 	state.output[0] = '\0';
 	state.enable_output = 0;
+	state.mode = 0;
 	////////////////////////// initialization of command is remaining ////////////
 }
 
@@ -353,12 +353,14 @@ void shell_update(uint8_t scankey, shellstate_t& stateinout){
 
     else if(scankey == 72) // top arrow key
     {
-
+			// stateinout.num_keys++;
+			// if(stateinout.line>1) stateinout.line--;
     }
 
     else if(scankey == 80) // bottom arrow key
     {
-
+			// stateinout.num_keys++;
+			// if(stateinout.line<22) stateinout.line++;
     }
 
 }
@@ -369,10 +371,11 @@ void shell_update(uint8_t scankey, shellstate_t& stateinout){
 //
 void shell_step(shellstate_t& stateinout)
 {
-	if(stateinout.exec_command == 0x01)
+	if(stateinout.exec_command == 0x01 && stateinout.mode == 0x0)
 	{
+		hoh_debug("in shell_step");
 		// calling corresponding fuctions
-		hoh_debug(stateinout.command);
+		// hoh_debug(stateinout.command);
 		if(equal_to(stateinout.command, "fact", 5)) // INPUT FORM -"fact $"
 		{
 			hoh_debug("fact is true");
@@ -381,6 +384,7 @@ void shell_step(shellstate_t& stateinout)
 			//Changing state to post-render-output stage
 			stateinout.line ++;
 			stateinout.column = 0;
+			stateinout.exec_command = 0x0;
 		}
 
 		else if(equal_to(stateinout.command, "pfactors", 9)) //INPUT FORM-"primefactors $"
@@ -391,11 +395,24 @@ void shell_step(shellstate_t& stateinout)
 			//Changing state to post-render-output stage
 			stateinout.line  ++ ; //VERIFY
 			stateinout.column = 0;
+			stateinout.exec_command = 0x0;
 		}
 
 		else if(equal_to(stateinout.command, "",1))
 		{
 			hoh_debug("Empty command");
+			stateinout.exec_command = 0x0;
+		}
+		//COROUTINE COMMAND
+		else if(equal_to(stateinout.command, "pfactorsc", 10))
+		{
+			stateinout.mode = 1;
+			// hoh_debug("pfactors for coroutine in shell step");
+		}
+		//FIBER COMMAND
+		else if(equal_to(stateinout.command, "pfactorsf", 10))
+		{
+			stateinout.mode = 2;
 		}
 		else
 		{
@@ -410,17 +427,20 @@ void shell_step(shellstate_t& stateinout)
 			//Changing state to post-render-output stage
 			stateinout.line ++;
 			stateinout.column = 0;
-
+			stateinout.exec_command = 0x0;
 		}
 		// clearing command and arguments of stateinout
-		for(int i=0; i<10; i++)
+		//don't clear if argument is pfactorsc
+		if(stateinout.mode == 0x0)
 		{
-			for(int j=0; j<10; j++)
-				stateinout.arguments[i][j] = '\0';
-			stateinout.command[i] = '\0';
+			for(int i=0; i<10; i++)
+			{
+				for(int j=0; j<10; j++)
+					stateinout.arguments[i][j] = '\0';
+				stateinout.command[i] = '\0';
+			}
+			stateinout.input_ctr = 0;
 		}
-		stateinout.exec_command = 0x0;
-		stateinout.input_ctr = 0;
 	}
 }
 
@@ -430,6 +450,7 @@ void shell_step(shellstate_t& stateinout)
 //
 void shell_render(const shellstate_t& shell, renderstate_t& render)
 {
+
 	// coping corresponding data structure
 	render.enable_output = shell.enable_output;
 	if(shell.exec_command == 0x01)
@@ -458,6 +479,9 @@ void shell_render(const shellstate_t& shell, renderstate_t& render)
 			render.output[i] = shell.output[i];
 		render.output[i] = '\0';
 	}
+
+	//copying mode
+	render.mode = shell.mode;
 }
 
 
@@ -494,20 +518,33 @@ void render(const renderstate_t& state, int w, int h, addr_t vgatext_base){
     if(enable)
     {
       drawtext(x+1, y-1, state.output, 100, 0x0, 0x7, w, h, vgatext_base);
-			write_shell(x+1,y, 0x0, 0x2, w, h, vgatext_base);
+			write_shell(1,y, 0x0, 0x2, w, h, vgatext_base);
     }
     else
     {
-      if(state.input_key != 10) //Not enter key (ASCII)
-      {
-				if(state.input_key != 8) //Backspace key (ASCII)
-        	vgatext::writechar(y*w+x+6, state.input_key, (uint8_t)0x0, (uint8_t)0x7, vgatext_base);
-				else
-					vgatext::writechar(y*w+x+7, (int)'\0', (uint8_t)0x0, (uint8_t)0x7, vgatext_base);
-      }
+			if(state.mode == 0x1)
+			{
+				if(state.input_key != 10)
+				{
+					if(state.input_key != 8) //Backspace key (ASCII)
+	        	vgatext::writechar((y+1)*w+x, state.input_key, (uint8_t)0x0, (uint8_t)0x7, vgatext_base);
+					else
+						vgatext::writechar((y+1)*w+x+1, (int)'\0', (uint8_t)0x0, (uint8_t)0x7, vgatext_base);
+				}
+			}
 			else
 			{
-				write_shell(x+1,y, 0x0, 0x2, w, h, vgatext_base);
+	      if(state.input_key != 10) //Not enter key (ASCII)
+	      {
+					if(state.input_key != 8) //Backspace key (ASCII)
+	        	vgatext::writechar(y*w+x+6, state.input_key, (uint8_t)0x0, (uint8_t)0x7, vgatext_base);
+					else
+						vgatext::writechar(y*w+x+7, (int)'\0', (uint8_t)0x0, (uint8_t)0x7, vgatext_base);
+	      }
+				else
+				{
+					write_shell(x+1,y, 0x0, 0x2, w, h, vgatext_base);
+				}
 			}
     }
 		char line_num[4], col_num[4], num_keys[4];
@@ -621,6 +658,8 @@ void fact_fxn(shellstate_t &state)
 
 void prime_factors_fxn(shellstate_t& state)
 {
+	int i=0;
+	int j=0;
 	// identify number or arguments
 	int num_arguments = 0;
 	for(num_arguments=0; !equal_to(state.arguments[num_arguments], "", 1) and num_arguments <= 9; num_arguments++){}
@@ -649,9 +688,18 @@ void prime_factors_fxn(shellstate_t& state)
 			return;
 		}
 		int output_iterator = 0;
-		for(int i=2; i<=n; i++)
+		for(i=2; i<=n; i++)
 		{
-			if(is_prime(i) && (n%i==0))
+			bool is_prime = true;
+			for(j=2; j<i; j++)
+			{
+				if(i%j==0)
+				{
+					is_prime = false;
+					// break;
+				}
+			}
+			if(is_prime && (n%i==0))
 			{
 				int num_digit = get_num_digit(i);
 				if((output_iterator + num_digit+2) >= 80)
@@ -666,6 +714,8 @@ void prime_factors_fxn(shellstate_t& state)
 		state.output[output_iterator] = '\0';
 	}
 }
+
+
 
 bool is_prime(int x)
 {
@@ -787,6 +837,7 @@ static void drawtext(int x,int y, const char* str, int maxw, uint8_t bg, uint8_t
   for(int i=0;i<maxw;i++){
     writecharxy(x+i,y,str[i],bg,fg,w,h,vgatext_base);
     if(!str[i]){
+			// for(int j=i+1; j<maxw;j++) writecharxy(x+j,y,str[i],bg,fg,w,h,vgatext_base);
       break;
     }
   }
