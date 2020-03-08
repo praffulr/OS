@@ -85,9 +85,14 @@ void int_to_string_write2(char* arr, int n)
 	}
 }
 
-void pfactorsf(shellstate_t& shellstate, int n, addr_t& main_stack, addr_t& f_stack)
+void pfactorsf(shellstate_t* pshellstate, int* pn, addr_t* pmain_stack, addr_t* pf_stack)
 {
-//	hoh_debug("i am inside");
+	//restoring the pointer values
+	shellstate_t& shellstate = *pshellstate;
+	int& n = *pn;
+	addr_t& main_stack = *pmain_stack;
+	addr_t& f_stack = *pf_stack;
+
 	/*
 		finds all prime factors of number n
 		implemented using fibers and stores 
@@ -112,11 +117,12 @@ void pfactorsf(shellstate_t& shellstate, int n, addr_t& main_stack, addr_t& f_st
 			shellstate.output[output_iterator-1] = ' ';
 		}
 		// return to main
-//		hoh_debug("about to return to main");
 		stack_saverestore(f_stack, main_stack);
 	}
 	shellstate.output[output_iterator] = '\0';
 	shellstate.isDone = true;
+	for(;;)
+		stack_saverestore(f_stack, main_stack);
 }
 
 void shell_step_fiber(shellstate_t& shellstate, addr_t& main_stack, addr_t& f_stack, addr_t f_array, uint32_t f_arraysize)
@@ -161,11 +167,10 @@ void shell_step_fiber(shellstate_t& shellstate, addr_t& main_stack, addr_t& f_st
 				{
 					// for the first time initialize the fstack
 					if(shellstate.isDone)
-						stack_init4(f_stack, &f_array, f_arraysize, &pfactorsf, shellstate, num_arguments, main_stack, f_stack);
+						stack_init4(f_stack, &f_array, f_arraysize, &pfactorsf, &shellstate, &n, &main_stack, &f_stack);
 					// if num_arg == 1 and arg >= 0 then
 					// change stack and call fxn
 					stack_saverestore(main_stack, f_stack);
-					hoh_debug("called fiber");
 				}
 			}
 			if(shellstate.isDone)
