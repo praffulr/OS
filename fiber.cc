@@ -87,7 +87,7 @@ void int_to_string_write2(char* arr, int n)
 
 void pfactorsf(shellstate_t& shellstate, int n, addr_t& main_stack, addr_t& f_stack)
 {
-	hoh_debug("i am inside");
+//	hoh_debug("i am inside");
 	/*
 		finds all prime factors of number n
 		implemented using fibers and stores 
@@ -112,7 +112,7 @@ void pfactorsf(shellstate_t& shellstate, int n, addr_t& main_stack, addr_t& f_st
 			shellstate.output[output_iterator-1] = ' ';
 		}
 		// return to main
-		hoh_debug("about to return to main");
+//		hoh_debug("about to return to main");
 		stack_saverestore(f_stack, main_stack);
 	}
 	shellstate.output[output_iterator] = '\0';
@@ -165,27 +165,27 @@ void shell_step_fiber(shellstate_t& shellstate, addr_t& main_stack, addr_t& f_st
 					// if num_arg == 1 and arg >= 0 then
 					// change stack and call fxn
 					stack_saverestore(main_stack, f_stack);
-//					pfactorsf(shellstate, n, main_stack, f_stack);
 					hoh_debug("called fiber");
 				}
 			}
-
-			// calculation done
-			// enable the output
-			shellstate.enable_output = 0x1;
-
-			// clearing command and arguments of shellstate
-			for(int i=0; i<10; i++)
+			if(shellstate.isDone)
 			{
-				for(int j=0; j<10; j++)	shellstate.arguments[i][j] = '\0';
-				shellstate.command[i] = '\0';
+				// calculation done
+				// enable the output
+				shellstate.enable_output = 0x1;
+
+				// clearing command and arguments of shellstate
+				for(int i=0; i<10; i++)
+				{
+					for(int j=0; j<10; j++)	shellstate.arguments[i][j] = '\0';
+					shellstate.command[i] = '\0';
+				}
+				shellstate.input_ctr = 0;
+				shellstate.line++;
+				shellstate.column = 0;
+				shellstate.exec_command = 0x0;
+				shellstate.mode = 0x0;
 			}
-			shellstate.input_ctr = 0;
-			shellstate.line++;
-			shellstate.column = 0;
-			shellstate.exec_command = 0x0;
-			shellstate.mode = 0x0;
 		}
 	}
 }
-
