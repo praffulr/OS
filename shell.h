@@ -38,6 +38,8 @@ struct renderstate_t
 	//2 -> fiber mode
 	short mode;
 	// uint32_t presses_in_c_mode; //number of presses in c_mode
+	// status of the fiber fxn
+	bool isDone;
 };
 
 void shell_init(shellstate_t& state);
