@@ -81,223 +81,231 @@ void shell_update(uint8_t scankey, shellstate_t& stateinout){
       stateinout.num_keys++;
       if(++stateinout.column > 80) {stateinout.line++; stateinout.column = 1;}
       stateinout.input_key = 48 + ((scankey - 1)%10);
-      if(stateinout.input_ctr != 0) {
+      if(stateinout.input_ctr != 0 && stateinout.isDone == true) {
 				append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);
 				hoh_debug("arg");hoh_debug(stateinout.arguments[0]);}
-      else append_char(stateinout.command, (char)stateinout.input_key);
+      else if(stateinout.isDone == true) append_char(stateinout.command, (char)stateinout.input_key);
     }
     else if (scankey == 16) //q
     {
       stateinout.num_keys++;
-      if(++stateinout.column > 80) {stateinout.line++; stateinout.column = 1;}
+      if(++stateinout.column > 80 && stateinout.isDone == true) {stateinout.line++; stateinout.column = 1;}
       stateinout.input_key = (uint8_t)'q';
-      if(stateinout.input_ctr != 0) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
-      else append_char(stateinout.command, (char)stateinout.input_key);
+      if(stateinout.input_ctr != 0 && stateinout.isDone == true) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
+      else if(stateinout.isDone == true) append_char(stateinout.command, (char)stateinout.input_key);
     }
     else if (scankey == 17) //w
     {
       stateinout.num_keys++;
-      if(++stateinout.column > 80) {stateinout.line++; stateinout.column = 1;}
+      if(++stateinout.column > 80 && stateinout.isDone == true) {stateinout.line++; stateinout.column = 1;}
       stateinout.input_key = (uint8_t)'w';
-      if(stateinout.input_ctr != 0) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
-      else append_char(stateinout.command, (char)stateinout.input_key);
+      if(stateinout.input_ctr != 0 && stateinout.isDone == true) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
+      else if(stateinout.isDone == true) append_char(stateinout.command, (char)stateinout.input_key);
     }
     else if (scankey == 18) //e
     {
       stateinout.num_keys++;
-      if(++stateinout.column > 80) {stateinout.line++; stateinout.column = 1;}
+      if(++stateinout.column > 80 && stateinout.isDone == true) {stateinout.line++; stateinout.column = 1;}
       stateinout.input_key = (uint8_t)'e';
-      if(stateinout.input_ctr != 0) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
-      else append_char(stateinout.command, (char)stateinout.input_key);
+      if(stateinout.input_ctr != 0 && stateinout.isDone == true) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
+      else if(stateinout.isDone == true) append_char(stateinout.command, (char)stateinout.input_key);
     }
     else if (scankey == 19) //r
     {
       stateinout.num_keys++;
-      if(++stateinout.column > 80) {stateinout.line++; stateinout.column = 1;}
+      if(++stateinout.column > 80 && stateinout.isDone == true) {stateinout.line++; stateinout.column = 1;}
       stateinout.input_key = (uint8_t)'r';
-      if(stateinout.input_ctr != 0) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
-      else append_char(stateinout.command, (char)stateinout.input_key);
+      if(stateinout.input_ctr != 0 && stateinout.isDone == true) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
+      else if(stateinout.isDone == true) append_char(stateinout.command, (char)stateinout.input_key);
     }
     else if (scankey == 20) //t
     {
       stateinout.num_keys++;
-      if(++stateinout.column > 80) {stateinout.line++; stateinout.column = 1;}
+      if(++stateinout.column > 80 && stateinout.isDone == true) {stateinout.line++; stateinout.column = 1;}
       stateinout.input_key = (uint8_t)'t';
-      if(stateinout.input_ctr != 0) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
-      else append_char(stateinout.command, (char)stateinout.input_key);
+      if(stateinout.input_ctr != 0 && stateinout.isDone == true) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
+      else if(stateinout.isDone == true) append_char(stateinout.command, (char)stateinout.input_key);
     }
     else if (scankey == 21) //y
     {
       stateinout.num_keys++;
-      if(++stateinout.column > 80) {stateinout.line++; stateinout.column = 1;}
+      if(++stateinout.column > 80 && stateinout.isDone == true) {stateinout.line++; stateinout.column = 1;}
       stateinout.input_key = (uint8_t)'y';
-      if(stateinout.input_ctr != 0) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
-      else append_char(stateinout.command, (char)stateinout.input_key);
+      if(stateinout.input_ctr != 0 && stateinout.isDone == true) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
+      else if(stateinout.isDone == true) append_char(stateinout.command, (char)stateinout.input_key);
     }
     else if (scankey == 22) //u
     {
       stateinout.num_keys++;
-      if(++stateinout.column > 80) {stateinout.line++; stateinout.column = 1;}
+      if(++stateinout.column > 80 && stateinout.isDone == true) {stateinout.line++; stateinout.column = 1;}
       stateinout.input_key = (uint8_t)'u';
-      if(stateinout.input_ctr != 0) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
-      else append_char(stateinout.command, (char)stateinout.input_key);
+      if(stateinout.input_ctr != 0 && stateinout.isDone == true) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
+      else if(stateinout.isDone == true) append_char(stateinout.command, (char)stateinout.input_key);
     }
     else if (scankey == 23) //i
     {
       stateinout.num_keys++;
-      if(++stateinout.column > 80) {stateinout.line++; stateinout.column = 1;}
+      if(++stateinout.column > 80 && stateinout.isDone == true) {stateinout.line++; stateinout.column = 1;}
       stateinout.input_key = (uint8_t)'i';
-      if(stateinout.input_ctr != 0) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
-      else append_char(stateinout.command, (char)stateinout.input_key);
+      if(stateinout.input_ctr != 0 && stateinout.isDone == true) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
+      else if(stateinout.isDone == true) append_char(stateinout.command, (char)stateinout.input_key);
     }
     else if (scankey == 24) //o
     {
       stateinout.num_keys++;
-      if(++stateinout.column > 80) {stateinout.line++; stateinout.column = 1;}
+      if(++stateinout.column > 80 && stateinout.isDone == true) {stateinout.line++; stateinout.column = 1;}
       stateinout.input_key = (uint8_t)'o';
-      if(stateinout.input_ctr != 0) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
-      else append_char(stateinout.command, (char)stateinout.input_key);
+      if(stateinout.input_ctr != 0 && stateinout.isDone == true) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
+      else if(stateinout.isDone == true) append_char(stateinout.command, (char)stateinout.input_key);
     }
     else if (scankey == 25) //p
     {
       stateinout.num_keys++;
-      if(++stateinout.column > 80) {stateinout.line++; stateinout.column = 1;}
+      if(++stateinout.column > 80 && stateinout.isDone == true) {stateinout.line++; stateinout.column = 1;}
       stateinout.input_key = (uint8_t)'p';
-      if(stateinout.input_ctr != 0) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
-      else append_char(stateinout.command, (char)stateinout.input_key);
+      if(stateinout.input_ctr != 0 && stateinout.isDone == true) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
+      else if(stateinout.isDone == true) append_char(stateinout.command, (char)stateinout.input_key);
     }
 
 
     else if (scankey == 30) //a
     {
       stateinout.num_keys++;
-      if(++stateinout.column > 80) {stateinout.line++; stateinout.column = 1;}
+      if(++stateinout.column > 80 && stateinout.isDone == true) {stateinout.line++; stateinout.column = 1;}
       stateinout.input_key = (uint8_t)'a';
-      if(stateinout.input_ctr != 0) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
-      else append_char(stateinout.command, (char)stateinout.input_key);
+      if(stateinout.input_ctr != 0 && stateinout.isDone == true) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
+      else if(stateinout.isDone == true) append_char(stateinout.command, (char)stateinout.input_key);
     }
     else if (scankey == 31) //s
     {
       stateinout.num_keys++;
-      if(++stateinout.column > 80) {stateinout.line++; stateinout.column = 1;}
+      if(++stateinout.column > 80 && stateinout.isDone == true) {stateinout.line++; stateinout.column = 1;}
       stateinout.input_key = (uint8_t)'s';
-      if(stateinout.input_ctr != 0) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
-      else append_char(stateinout.command, (char)stateinout.input_key);
+      if(stateinout.input_ctr != 0 && stateinout.isDone == true) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
+      else if(stateinout.isDone == true) append_char(stateinout.command, (char)stateinout.input_key);
     }
     else if (scankey == 32) //d
     {
       stateinout.num_keys++;
-      if(++stateinout.column > 80) {stateinout.line++; stateinout.column = 1;}
+      if(++stateinout.column > 80 && stateinout.isDone == true) {stateinout.line++; stateinout.column = 1;}
       stateinout.input_key = (uint8_t)'d';
-      if(stateinout.input_ctr != 0) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
-      else append_char(stateinout.command, (char)stateinout.input_key);
+      if(stateinout.input_ctr != 0 && stateinout.isDone == true) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
+      else if(stateinout.isDone == true) append_char(stateinout.command, (char)stateinout.input_key);
     }
     else if (scankey == 33) //f
     {
 	stateinout.num_keys++;
-	if(++stateinout.column > 80) {stateinout.line++; stateinout.column = 1;}
+      if(++stateinout.column > 80 && stateinout.isDone == true) {stateinout.line++; stateinout.column = 1;}
 	// -----------------------------------------------------------------------------
 	stateinout.input_key = (uint8_t)'f';
-	if(stateinout.input_ctr != 0) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
-	else append_char(stateinout.command, (char)stateinout.input_key);
+	if(stateinout.input_ctr != 0 && stateinout.isDone == true) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
+	else if(stateinout.isDone == true) append_char(stateinout.command, (char)stateinout.input_key);
+	hoh_debug("left shell update condition");
     }
     else if (scankey == 34) //g
     {
       stateinout.num_keys++;
-      if(++stateinout.column > 80) {stateinout.line++; stateinout.column = 1;}
+      if(++stateinout.column > 80 && stateinout.isDone == true) {stateinout.line++; stateinout.column = 1;}
       stateinout.input_key = (uint8_t)'g';
-      if(stateinout.input_ctr != 0) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
-      else append_char(stateinout.command, (char)stateinout.input_key);
+      if(stateinout.input_ctr != 0 && stateinout.isDone == true) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
+      else if(stateinout.isDone == true) append_char(stateinout.command, (char)stateinout.input_key);
     }
     else if (scankey == 35) //h
     {
       stateinout.num_keys++;
-      if(++stateinout.column > 80) {stateinout.line++; stateinout.column = 1;}
+      if(++stateinout.column > 80 && stateinout.isDone == true) {stateinout.line++; stateinout.column = 1;}
       stateinout.input_key = (uint8_t)'h';
-      if(stateinout.input_ctr != 0) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
-      else append_char(stateinout.command, (char)stateinout.input_key);
+      if(stateinout.input_ctr != 0 && stateinout.isDone == true) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
+      else if(stateinout.isDone == true) append_char(stateinout.command, (char)stateinout.input_key);
     }
     else if (scankey == 36) //j
     {
       stateinout.num_keys++;
-      if(++stateinout.column > 80) {stateinout.line++; stateinout.column = 1;}
+      if(++stateinout.column > 80 && stateinout.isDone == true) {stateinout.line++; stateinout.column = 1;}
       stateinout.input_key = (uint8_t)'j';
-      if(stateinout.input_ctr != 0) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
-      else append_char(stateinout.command, (char)stateinout.input_key);
+      if(stateinout.input_ctr != 0 && stateinout.isDone == true) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
+      else if(stateinout.isDone == true) append_char(stateinout.command, (char)stateinout.input_key);
     }
     else if (scankey == 37) //k
     {
       stateinout.num_keys++;
-      if(++stateinout.column > 80) {stateinout.line++; stateinout.column = 1;}
+      if(++stateinout.column > 80 && stateinout.isDone == true) {stateinout.line++; stateinout.column = 1;}
       stateinout.input_key = (uint8_t)'k';
-      if(stateinout.input_ctr != 0) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
-      else append_char(stateinout.command, (char)stateinout.input_key);
+      if(stateinout.input_ctr != 0 && stateinout.isDone == true) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
+      else if(stateinout.isDone == true) append_char(stateinout.command, (char)stateinout.input_key);
+
     }
     else if (scankey == 38) //l
     {
       stateinout.num_keys++;
-      if(++stateinout.column > 80) {stateinout.line++; stateinout.column = 1;}
+      if(++stateinout.column > 80 && stateinout.isDone == true) {stateinout.line++; stateinout.column = 1;}
       stateinout.input_key = (uint8_t)'l';
-      if(stateinout.input_ctr != 0) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
-      else append_char(stateinout.command, (char)stateinout.input_key);
+      if(stateinout.input_ctr != 0 && stateinout.isDone == true) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
+      else if(stateinout.isDone == true) append_char(stateinout.command, (char)stateinout.input_key);
     }
 
 
     else if (scankey == 44) //z
     {
       stateinout.num_keys++;
-      if(++stateinout.column > 80) {stateinout.line++; stateinout.column = 1;}
+      if(++stateinout.column > 80 && stateinout.isDone == true) {stateinout.line++; stateinout.column = 1;}
       stateinout.input_key = (uint8_t)'z';
-      if(stateinout.input_ctr != 0) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
-      else append_char(stateinout.command, (char)stateinout.input_key);
+      if(stateinout.input_ctr != 0 && stateinout.isDone == true) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
+      else if(stateinout.isDone == true) append_char(stateinout.command, (char)stateinout.input_key);
     }
     else if (scankey == 45) //x
     {
       stateinout.num_keys++;
-      if(++stateinout.column > 80) {stateinout.line++; stateinout.column = 1;}
+      if(++stateinout.column > 80 && stateinout.isDone == true) {stateinout.line++; stateinout.column = 1;}
       stateinout.input_key = (uint8_t)'x';
-      if(stateinout.input_ctr != 0) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
-      else append_char(stateinout.command, (char)stateinout.input_key);
+      if(stateinout.input_ctr != 0 && stateinout.isDone == true) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
+      else if(stateinout.isDone == true) append_char(stateinout.command, (char)stateinout.input_key);
+
     }
     else if (scankey == 46) //c
     {
       stateinout.num_keys++;
-      if(++stateinout.column > 80) {stateinout.line++; stateinout.column = 1;}
+      if(++stateinout.column > 80 && stateinout.isDone == true) {stateinout.line++; stateinout.column = 1;}
       stateinout.input_key = (uint8_t)'c';
-      if(stateinout.input_ctr != 0) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
-      else append_char(stateinout.command, (char)stateinout.input_key);
+      if(stateinout.input_ctr != 0 && stateinout.isDone == true) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
+      else if(stateinout.isDone == true) append_char(stateinout.command, (char)stateinout.input_key);
+
     }
     else if (scankey == 47) //v
     {
       stateinout.num_keys++;
-      if(++stateinout.column > 80) {stateinout.line++; stateinout.column = 1;}
+      if(++stateinout.column > 80 && stateinout.isDone == true) {stateinout.line++; stateinout.column = 1;}
       stateinout.input_key = (uint8_t)'v';
-      if(stateinout.input_ctr != 0) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
-      else append_char(stateinout.command, (char)stateinout.input_key);
+      if(stateinout.input_ctr != 0 && stateinout.isDone == true) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
+      else if(stateinout.isDone == true) append_char(stateinout.command, (char)stateinout.input_key);
+
     }
     else if (scankey == 48) //b
     {
       stateinout.num_keys++;
-      if(++stateinout.column > 80) {stateinout.line++; stateinout.column = 1;}
+      if(++stateinout.column > 80 && stateinout.isDone == true) {stateinout.line++; stateinout.column = 1;}
       stateinout.input_key = (uint8_t)'b';
-      if(stateinout.input_ctr != 0) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
-      else append_char(stateinout.command, (char)stateinout.input_key);
+      if(stateinout.input_ctr != 0 && stateinout.isDone == true) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
+      else if(stateinout.isDone == true) append_char(stateinout.command, (char)stateinout.input_key);
+
     }
     else if (scankey == 49) //n
     {
       stateinout.num_keys++;
-      if(++stateinout.column > 80) {stateinout.line++; stateinout.column = 1;}
+      if(++stateinout.column > 80 && stateinout.isDone == true) {stateinout.line++; stateinout.column = 1;}
       stateinout.input_key = (uint8_t)'n';
-      if(stateinout.input_ctr != 0) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
-      else append_char(stateinout.command, (char)stateinout.input_key);
+      if(stateinout.input_ctr != 0 && stateinout.isDone == true) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
+      else if(stateinout.isDone == true) append_char(stateinout.command, (char)stateinout.input_key);
+
     }
     else if (scankey == 50) //m
     {
       stateinout.num_keys++;
-      if(++stateinout.column > 80) {stateinout.line++; stateinout.column = 1;}
+      if(++stateinout.column > 80 && stateinout.isDone == true) {stateinout.line++; stateinout.column = 1;}
       stateinout.input_key = (uint8_t)'m';
-      if(stateinout.input_ctr != 0) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
-      else append_char(stateinout.command, (char)stateinout.input_key);
+      if(stateinout.input_ctr != 0 && stateinout.isDone == true) {append_char(stateinout.arguments[stateinout.input_ctr-1], (char)stateinout.input_key);}
+      else if(stateinout.isDone == true) append_char(stateinout.command, (char)stateinout.input_key);
+
     }
 
 
@@ -307,11 +315,11 @@ void shell_update(uint8_t scankey, shellstate_t& stateinout){
     }
     else if (scankey == 28) //ENTER
     {
-			stateinout.num_keys++;
-      stateinout.input_key = 10;
-      stateinout.exec_command = 0x01;
-      stateinout.line++; //increase line number by 1 - assuming answer in only one line
-      stateinout.column = 0;
+	stateinout.num_keys++;
+	stateinout.input_key = 10;
+	stateinout.exec_command = 0x01;
+	stateinout.line++; //increase line number by 1 - assuming answer in only one line
+	stateinout.column = 0;
     }
     else if(scankey == 75) // left arrow key
     {
@@ -486,6 +494,8 @@ void shell_render(const shellstate_t& shell, renderstate_t& render)
 
 	//copying mode
 	render.mode = shell.mode;
+	// status: whether the computation is running or not
+	render.isDone = shell.isDone;
 }
 
 
@@ -524,7 +534,7 @@ void render(const renderstate_t& state, int w, int h, addr_t vgatext_base){
 			drawtext(x+1, y-1, state.output, 100, 0x0, 0x7, w, h, vgatext_base);
 			write_shell(1,y, 0x0, 0x2, w, h, vgatext_base);
 		}
-		else
+		else if(state.isDone == true)
 		{
 			if(state.mode == 0x1 || state.mode == 0x2)
 			{
@@ -541,7 +551,10 @@ void render(const renderstate_t& state, int w, int h, addr_t vgatext_base){
 				if(state.input_key != 10) //Not enter key (ASCII)
 				{
 					if(state.input_key != 8) //Backspace key (ASCII)
+					{
 						vgatext::writechar(y*w+x+6, state.input_key, (uint8_t)0x0, (uint8_t)0x7, vgatext_base);
+						hoh_debug("five left render condition");
+					}
 					else
 						vgatext::writechar(y*w+x+7, (int)'\0', (uint8_t)0x0, (uint8_t)0x7, vgatext_base);
 				}
@@ -549,12 +562,16 @@ void render(const renderstate_t& state, int w, int h, addr_t vgatext_base){
 			}
 		}
 		char line_num[4], col_num[4], num_keys[4];
-		int_to_string_write(line_num, state.line);
-		drawtext(19, 23, line_num, 3, (uint8_t)0xe, (uint8_t)0x0, w, h, vgatext_base);
-		int_to_string_write(col_num, (state.column+7));
-		drawtext(29, 23, col_num, 3, (uint8_t)0xe, (uint8_t)0x0, w, h, vgatext_base);
+		if(state.isDone == true)
+		{
+			int_to_string_write(line_num, state.line);
+			drawtext(19, 23, line_num, 3, (uint8_t)0xe, (uint8_t)0x0, w, h, vgatext_base);
+			int_to_string_write(col_num, (state.column+7));
+			drawtext(29, 23, col_num, 3, (uint8_t)0xe, (uint8_t)0x0, w, h, vgatext_base);
+		}		
 		int_to_string_write(num_keys, state.num_keys);
 		drawtext(54, 23, num_keys, 3, (uint8_t)0xe, (uint8_t)0x0, w, h, vgatext_base);
+		hoh_debug("left hoh render");
 	}
 }
 
