@@ -87,18 +87,19 @@ void int_to_string_write2(char* arr, int n)
 
 void pfactorsf(shellstate_t* pshellstate, int* pn, addr_t* pmain_stack, addr_t* pf_stack)
 {
-	//restoring the pointer values
-	shellstate_t& shellstate = *pshellstate;
-	int& n = *pn;
-	addr_t& main_stack = *pmain_stack;
-	addr_t& f_stack = *pf_stack;
-
 	/*
 		finds all prime factors of number n
 		implemented using fibers and stores 
 		all the answer to shellstate's
 		output vatiable
 	*/
+
+	//restoring the pointer values
+	shellstate_t& shellstate = *pshellstate;
+	int& n = *pn;
+	addr_t& main_stack = *pmain_stack;
+	addr_t& f_stack = *pf_stack;
+
 	int output_iterator = 0;
 	shellstate.isDone = false;
 	for(int i=2; i<= n; i++)
@@ -121,21 +122,19 @@ void pfactorsf(shellstate_t* pshellstate, int* pn, addr_t* pmain_stack, addr_t* 
 	}
 	shellstate.output[output_iterator] = '\0';
 	shellstate.isDone = true;
-	for(;;)
-		stack_saverestore(f_stack, main_stack);
+	stack_saverestore(f_stack, main_stack);
 }
 
 void shell_step_fiber(shellstate_t& shellstate, addr_t& main_stack, addr_t& f_stack, addr_t f_array, uint32_t f_arraysize)
 {
 	// currently active stack: main_stack
-	if(shellstate.exec_command == 0x01 && shellstate.mode == 0x02)
+	if((shellstate.exec_command == 0x01 && shellstate.mode == 0x02))
 	{
 		if(equal_to2(shellstate.command, "pfactorsf", 10))
 		{
 			// get the number of arguments
 			int num_arguments = 0;
-			for(num_arguments=0x0; !equal_to2(shellstate.arguments[num_arguments], "", 1) and num_arguments <= 0x9; num_arguments++){}
-
+			for(num_arguments=0x0; !equal_to2(shellstate.arguments[num_arguments], "", 1) && num_arguments <= 0x9; num_arguments++){}
 			
 			// if number of arguments == 0 then show error
 			if(num_arguments != 1)
@@ -148,6 +147,17 @@ void shell_step_fiber(shellstate_t& shellstate, addr_t& main_stack, addr_t& f_st
 				shellstate.output[3] = 'O';
 				shellstate.output[4] = 'R';
 				shellstate.output[5] = '\0';
+				// clearing command and arguments of shellstate
+				for(int i=0; i<10; i++)
+				{
+					for(int j=0; j<10; j++)	shellstate.arguments[i][j] = '\0';
+					shellstate.command[i] = '\0';
+				}
+				shellstate.input_ctr = 0;
+				shellstate.line++;
+				shellstate.column = 0;
+				shellstate.exec_command = 0x0;
+				shellstate.mode = 0x0;
 			}
 			else
 			{
@@ -162,6 +172,17 @@ void shell_step_fiber(shellstate_t& shellstate, addr_t& main_stack, addr_t& f_st
 					shellstate.output[3] = 'O';
 					shellstate.output[4] = 'R';
 					shellstate.output[5] = '\0';
+					// clearing command and arguments of shellstate
+					for(int i=0; i<10; i++)
+					{
+						for(int j=0; j<10; j++)	shellstate.arguments[i][j] = '\0';
+						shellstate.command[i] = '\0';
+					}
+					shellstate.input_ctr = 0;
+					shellstate.line++;
+					shellstate.column = 0;
+					shellstate.exec_command = 0x0;
+					shellstate.mode = 0x0;
 				}
 				else
 				{
@@ -171,25 +192,25 @@ void shell_step_fiber(shellstate_t& shellstate, addr_t& main_stack, addr_t& f_st
 					// if num_arg == 1 and arg >= 0 then
 					// change stack and call fxn
 					stack_saverestore(main_stack, f_stack);
-				}
-			}
-			if(shellstate.isDone)
-			{
-				// calculation done
-				// enable the output
-				shellstate.enable_output = 0x1;
+					if(shellstate.isDone)
+					{
+						// calculation done
+						// enable the output
+						shellstate.enable_output = 0x1;
 
-				// clearing command and arguments of shellstate
-				for(int i=0; i<10; i++)
-				{
-					for(int j=0; j<10; j++)	shellstate.arguments[i][j] = '\0';
-					shellstate.command[i] = '\0';
+						// clearing command and arguments of shellstate
+						for(int i=0; i<10; i++)
+						{
+							for(int j=0; j<10; j++)	shellstate.arguments[i][j] = '\0';
+							shellstate.command[i] = '\0';
+						}
+						shellstate.input_ctr = 0;
+						shellstate.line++;
+						shellstate.column = 0;
+						shellstate.exec_command = 0x0;
+						shellstate.mode = 0x0;
+					}
 				}
-				shellstate.input_ctr = 0;
-				shellstate.line++;
-				shellstate.column = 0;
-				shellstate.exec_command = 0x0;
-				shellstate.mode = 0x0;
 			}
 		}
 	}
