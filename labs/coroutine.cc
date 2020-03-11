@@ -1,3 +1,5 @@
+// FIXME: check few fix set of assignments are done inside error block
+
 #include "labs/coroutine.h"
 
 bool equal_to1(char* str1, char* str2, int len)
@@ -84,8 +86,6 @@ void int_to_string_write1(char* arr, int n)
 
 void shell_step_coroutine(shellstate_t& shellstate, coroutine_t& f_coro, f_t& f_locals){
 
-    //insert your code here
-
     //copying local data
     int& i = f_locals.i;
     int& n = f_locals.n;
@@ -103,16 +103,16 @@ void shell_step_coroutine(shellstate_t& shellstate, coroutine_t& f_coro, f_t& f_
         // user didn't provided any input
 
 
-        if(num_arguments != 1)
-        {
-          hoh_debug(num_arguments);
-          hoh_debug("Primes arguments");
-          shellstate.output[0] = 'E';
-          shellstate.output[1] = 'R';
-          shellstate.output[2] = 'R';
-          shellstate.output[3] = 'O';
-          shellstate.output[4] = 'R';
-          shellstate.output[5] = '\0';
+	if(num_arguments != 1)
+	{
+		hoh_debug(num_arguments);
+		hoh_debug("Primes arguments");
+		shellstate.output[0] = 'E';
+		shellstate.output[1] = 'R';
+		shellstate.output[2] = 'R';
+		shellstate.output[3] = 'O';
+		shellstate.output[4] = 'R';
+		shellstate.output[5] = '\0';
         }
         else
         {

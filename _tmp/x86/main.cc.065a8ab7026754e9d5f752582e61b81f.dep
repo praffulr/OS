@@ -46,7 +46,7 @@ _tmp/x86/main.cc.065a8ab7026754e9d5f752582e61b81f.dep  ./_tmp/x86/main.065a8ab70
  /usr/include/boost/detail/workaround.hpp \
  /usr/include/boost/config/workaround.hpp labs/keyboard.h \
  generated/lpc_kbd.dev.h labs/shell.h labs/coroutine.h util/coroutine.h \
- labs/fiber.h util/fiber.h
+ labs/fiber.h util/fiber.h labs/fiber_scheduler.h
 
 labs/vgatext.h:
 
@@ -217,3 +217,5 @@ util/coroutine.h:
 labs/fiber.h:
 
 util/fiber.h:
+
+labs/fiber_scheduler.h:
