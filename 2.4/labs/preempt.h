@@ -58,7 +58,7 @@ struct preempt_t
       "  # insert your code here          \n\t"\
       "                                   \n\t"\
       "  #if thread is already inside yield\n\t"\
-			"  cmp $0, %gs:"STR(core_offset_preempt+0)"   \n\t"\
+			"  cmp $0, %gs:"STR(core_offset_preempt+0)"  \n\t"\
 			"  je "STR(Inter_handler)"          \n\t"\
       "  jmp iret_toring0                 \n\t"\
 			"                                   \n\t"\
@@ -72,9 +72,9 @@ struct preempt_t
       "  subl $512, %esp                  \n\t"\
       "  andl $0xfffffff0, %esp           \n\t"\
       "  FXSAVE (%esp)                    \n\t"\
-      "  PUSHF               			\n\t"\
+      "  PUSHF               			        \n\t"\
       "  #set interrupt enable flag   		\n\t"\
-      "  STI                                 \n\t"\
+      "  STI                              \n\t"\
 			"  pushl $1f  #restore handler      \n\t"\
 			"                                   \n\t"\
 			"  #store esp to core.preempt_t     \n\t"\

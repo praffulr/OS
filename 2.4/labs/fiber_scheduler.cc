@@ -367,7 +367,6 @@ void shell_step_fiber_scheduler(shellstate_t& shellstate, addr_t& main_stack, pr
 							shellstate.g_count--;
 						else if(shellstate.head >= 3 && shellstate.head<6)
 							shellstate.h_count--;
-						// preempt.flag = 1; WHY??
 					}
 				}
 			}
@@ -379,7 +378,6 @@ void shell_step_fiber_scheduler(shellstate_t& shellstate, addr_t& main_stack, pr
 				head = (head+1)%shellstate.FIBER_SIZE;
 			}
 			shellstate.head = head;
-			preempt.f_stack = stackptrs[head];
 		}
 		//CHANGING MODE TO ZERO
 		bool to_zero = true;
