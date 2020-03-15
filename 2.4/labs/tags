@@ -1,0 +1,101 @@
+!_TAG_FILE_SORTED	2	/0=unsorted, 1=sorted, 2=foldcase/
+append_char	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^void append_char(char* left, char right)$/;"	f	language:C++
+append_char	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^void append_char(char* left, char right);$/;"	p	language:C++	file:
+arguments	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^	char arguments[10][10];$/;"	m	language:C++	struct:shellstate_t
+char_array_to_int	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^int char_array_to_int(char *string)$/;"	f	language:C++
+char_array_to_int	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^int char_array_to_int(char *string);$/;"	p	language:C++	file:
+char_array_to_int3	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/fiber_scheduler.cc	/^int char_array_to_int3(char *string)$/;"	f	language:C++
+clean_fiber_args_output	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/fiber_scheduler.cc	/^static void clean_fiber_args_output(shellstate_t& shellstate, int index)$/;"	f	language:C++	file:
+column	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^	int line, column, num_keys;$/;"	m	language:C++	struct:renderstate_t
+column	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^	int line, column, num_keys;$/;"	m	language:C++	struct:shellstate_t
+command	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^	char command[10];$/;"	m	language:C++	struct:shellstate_t
+copy_fiber_output	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/fiber_scheduler.cc	/^static void copy_fiber_output(shellstate_t& shellstate, int index)$/;"	f	language:C++	file:
+copy_string	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^void copy_string(char* left, char* right, int max_len)$/;"	f	language:C++
+copy_string	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^void copy_string(char* left, char* right, int max_length);$/;"	p	language:C++	file:
+cut_off_time	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^	int cut_off_time;$/;"	m	language:C++	struct:shellstate_t
+digit_to_char	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^char digit_to_char(int n)$/;"	f	language:C++
+digit_to_char	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^char digit_to_char(int n);$/;"	p	language:C++	file:
+digit_to_char3	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/fiber_scheduler.cc	/^char digit_to_char3(int n)$/;"	f	language:C++
+drawnumberinhex	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^static void drawnumberinhex(int x,int y, uint32_t number, int maxw, uint8_t bg, uint8_t fg, int w, int h, addr_t vgatext_base);$/;"	p	language:C++	file:
+drawnumberinhex	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^static void drawnumberinhex(int x,int y, uint32_t number, int maxw, uint8_t bg, uint8_t fg, int w, int h, addr_t vgatext_base){$/;"	f	language:C++	file:
+drawrect	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^static void drawrect(int x0, int y0, int x1, int y1, uint8_t bg, uint8_t fg, int w, int h, addr_t vgatext_base);$/;"	p	language:C++	file:
+drawrect	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^static void drawrect(int x0, int y0, int x1, int y1, uint8_t bg, uint8_t fg, int w, int h, addr_t vgatext_base){$/;"	f	language:C++	file:
+drawtext	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^static void drawtext(int x,int y, const char* str, int maxw, uint8_t bg, uint8_t fg, int w, int h, addr_t vgatext_base);$/;"	p	language:C++	file:
+drawtext	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^static void drawtext(int x,int y, const char* str, int maxw, uint8_t bg, uint8_t fg, int w, int h, addr_t vgatext_base){$/;"	f	language:C++	file:
+enable_output	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^	uint8_t enable_output;$/;"	m	language:C++	struct:shellstate_t
+enable_output	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^	uint8_t enable_output;\/\/if(enable[i]==true) qualified for output on vga screen$/;"	m	language:C++	struct:renderstate_t
+equal_to	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^bool equal_to(char* str1, char* str2, int len)$/;"	f	language:C++
+equal_to	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^bool equal_to(char*, char*, int);$/;"	p	language:C++	file:
+equal_to3	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/fiber_scheduler.cc	/^bool equal_to3(char* str1, char* str2, int len)$/;"	f	language:C++
+exec_command	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^	uint8_t exec_command;$/;"	m	language:C++	struct:shellstate_t
+fact_fxn	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^void fact_fxn(shellstate_t &state)$/;"	f	language:C++
+fact_fxn	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^void fact_fxn(shellstate_t& state);$/;"	p	language:C++	file:
+fiber_arguments	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^	char fiber_arguments[6][10][10];$/;"	m	language:C++	struct:shellstate_t
+fiber_enable_output	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^	uint8_t fiber_enable_output[6];$/;"	m	language:C++	struct:shellstate_t
+fiber_isDone	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^	bool fiber_isDone[6];$/;"	m	language:C++	struct:shellstate_t
+fiber_isFirst	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^	bool fiber_isFirst[6];$/;"	m	language:C++	struct:shellstate_t
+fiber_output	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^	char fiber_output[6][80];$/;"	m	language:C++	struct:shellstate_t
+FIBER_SIZE	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^	int FIBER_SIZE = 6;$/;"	m	language:C++	struct:shellstate_t
+fillrect	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^static void fillrect(int x0, int y0, int x1, int y1, uint8_t bg, uint8_t fg, int w, int h, addr_t vgatext_base);$/;"	p	language:C++	file:
+fillrect	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^static void fillrect(int x0, int y0, int x1, int y1, uint8_t bg, uint8_t fg, int w, int h, addr_t vgatext_base){$/;"	f	language:C++	file:
+flags	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/preempt.h	/^	int flags[6] = {0};$/;"	m	language:C++	struct:preempt_t
+f_stacks	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/preempt.h	/^	int f_stacks[6];$/;"	m	language:C++	struct:preempt_t
+get_num_digit	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^int get_num_digit(int n)$/;"	f	language:C++
+get_num_digit	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^int get_num_digit(int n);$/;"	p	language:C++	file:
+get_num_digit3	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/fiber_scheduler.cc	/^int get_num_digit3(int n)$/;"	f	language:C++
+get_string_length	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^int get_string_length(char *string)$/;"	f	language:C++
+get_string_length	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^int get_string_length(char *string);$/;"	p	language:C++	file:
+get_string_length3	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/fiber_scheduler.cc	/^int get_string_length3(char *string)$/;"	f	language:C++
+g_count	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^	int g_count, h_count, head;$/;"	m	language:C++	struct:shellstate_t
+head	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/preempt.h	/^	int head = 0;$/;"	m	language:C++	struct:preempt_t
+head	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^	int g_count, h_count, head;$/;"	m	language:C++	struct:shellstate_t
+h_count	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^	int g_count, h_count, head;$/;"	m	language:C++	struct:shellstate_t
+init_flag	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^	int init_flag;$/;"	m	language:C++	struct:renderstate_t
+init_flag	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^	int input_ctr, init_flag;$/;"	m	language:C++	struct:shellstate_t
+input_ctr	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^	int input_ctr, init_flag;$/;"	m	language:C++	struct:shellstate_t
+input_key	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^	int input_key;$/;"	m	language:C++	struct:renderstate_t
+input_key	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^	int input_key;$/;"	m	language:C++	struct:shellstate_t
+insert_cursor	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^static void insert_cursor(int x, int y, uint8_t bg, uint8_t fg, int w, int h, addr_t vgatext_base)$/;"	f	language:C++	file:
+insert_cursor	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^static void insert_cursor(int x, int y, uint8_t bg, uint8_t fg, int w, int h, addr_t vgatext_base);$/;"	p	language:C++	file:
+int_to_string	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^void int_to_string(shellstate_t &check, int n)$/;"	f	language:C++
+int_to_string	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^void int_to_string(shellstate_t &check, int n);$/;"	p	language:C++	file:
+int_to_string_write	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^void int_to_string_write(char* arr, int n)$/;"	f	language:C++
+int_to_string_write	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^void int_to_string_write(char* arr, int n);$/;"	p	language:C++	file:
+int_to_string_write3	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/fiber_scheduler.cc	/^void int_to_string_write3(char* arr, int n)$/;"	f	language:C++
+isDone	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^	bool isDone;$/;"	m	language:C++	struct:renderstate_t
+isDone	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^	bool isDone;$/;"	m	language:C++	struct:shellstate_t
+is_prime	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^bool is_prime(int x)$/;"	f	language:C++
+is_prime	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^bool is_prime(int);$/;"	p	language:C++	file:
+line	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^	int line, column, num_keys;$/;"	m	language:C++	struct:renderstate_t
+line	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^	int line, column, num_keys;$/;"	m	language:C++	struct:shellstate_t
+mode	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^	short mode;$/;"	m	language:C++	struct:renderstate_t
+mode	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^	short mode;$/;"	m	language:C++	struct:shellstate_t
+num_keys	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^	int line, column, num_keys;$/;"	m	language:C++	struct:renderstate_t
+num_keys	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^	int line, column, num_keys;$/;"	m	language:C++	struct:shellstate_t
+output	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^	char output[80];$/;"	m	language:C++	struct:renderstate_t
+output	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^	char output[80];$/;"	m	language:C++	struct:shellstate_t
+pfactorsf3	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/fiber_scheduler.cc	/^void pfactorsf3(shellstate_t* pshellstate, int* pn, addr_t* pmain_stack, addr_t* pf_stack, preempt_t* ppreempt)$/;"	f	language:C++
+pfactorsf3_preemptive	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/fiber_scheduler.cc	/^void pfactorsf3_preemptive(shellstate_t* pshellstate, int* pn, addr_t* pmain_stack, addr_t* pf_stack)$/;"	f	language:C++
+preempt_t	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/preempt.h	/^struct preempt_t$/;"	s	language:C++
+prime_factors_fxn	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^void prime_factors_fxn(shellstate_t& state)$/;"	f	language:C++
+prime_factors_fxn	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^void prime_factors_fxn(shellstate_t& state);$/;"	p	language:C++	file:
+render	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^void render(const renderstate_t& state, int w, int h, addr_t vgatext_base){$/;"	f	language:C++
+render	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^void render(const renderstate_t& state, int w, int h, addr_t display_base);$/;"	p	language:C++
+renderstate_t	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^struct renderstate_t$/;"	s	language:C++
+render_eq	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^bool render_eq(const renderstate_t& a, const renderstate_t& b){$/;"	f	language:C++
+render_eq	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^bool render_eq(const renderstate_t& a, const renderstate_t& b);$/;"	p	language:C++
+shellstate_t	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^struct shellstate_t$/;"	s	language:C++
+shell_init	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^void shell_init(shellstate_t& state){$/;"	f	language:C++
+shell_init	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^void shell_init(shellstate_t& state);$/;"	p	language:C++
+shell_render	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^void shell_render(const shellstate_t& shell, renderstate_t& render)$/;"	f	language:C++
+shell_render	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^void shell_render(const shellstate_t& shell, renderstate_t& render);$/;"	p	language:C++
+shell_step	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^void shell_step(shellstate_t& stateinout)$/;"	f	language:C++
+shell_step	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^void shell_step(shellstate_t& stateinout);$/;"	p	language:C++
+shell_step_fiber_scheduler	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/fiber_scheduler.cc	/^void shell_step_fiber_scheduler(shellstate_t& shellstate, addr_t& main_stack, preempt_t& preempt, addr_t stackptrs[], size_t stackptrs_size, addr_t arrays, size_t arrays_size, dev_lapic_t& lapic)$/;"	f	language:C++
+shell_update	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^void shell_update(uint8_t scankey, shellstate_t& stateinout){$/;"	f	language:C++
+shell_update	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.h	/^void shell_update(uint8_t scankey, shellstate_t& stateinout);$/;"	p	language:C++
+writecharxy	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^static void writecharxy(int x, int y, uint8_t c, uint8_t bg, uint8_t fg, int w, int h, addr_t vgatext_base){$/;"	f	language:C++	file:
+write_Res	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^static void write_Res(int x, int y, uint8_t bg, uint8_t fg, int w, int h, addr_t vgatext_base)$/;"	f	language:C++	file:
+write_shell	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^static void write_shell(int x, int y, uint8_t bg, uint8_t fg, int w, int h, addr_t vgatext_base)$/;"	f	language:C++	file:
+write_shell	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/shell.cc	/^static void write_shell(int x, int y, uint8_t bg, uint8_t fg, int w, int h, addr_t vgatext_base);$/;"	p	language:C++	file:
+_ring0_preempt	/home/dwijesh/Documents/sem6/os/assns/assn2/hohlabs/labs/preempt.h	47;"	d	language:C++
