@@ -26,9 +26,10 @@ struct preempt_t
 	/*	scheduler fxn	:	path through
 	 *	---------------------------------------
 	 *	flag	0	: 	f_stack
-	 *	flag	1	:	main_stack
+	 *	flag	1	:	main_stack and timer is set
+	 *	flag	2	:	main_stack and timer not set
 	*/
-	int flag = 0;
+	int flag = 2;
 	addr_t f_stack;
 };
 
@@ -44,73 +45,55 @@ struct preempt_t
 //
 
 #  define  _ring0_preempt(_name,_f)            \
-  __asm(                                       \
-      "  .text                            \n\t"\
-      " " STR(_name) ":                   \n\t"\
-      "  pushl %edx                       \n\t"\
-      "  pushl %ecx                       \n\t"\
-      "  pushl %eax                       \n\t"\
-      "  call " STR(_f) "                 \n\t"\
-      "  popl  %eax                       \n\t"\
-      "  popl  %ecx                       \n\t"\
-      "  popl  %edx                       \n\t"\
-      "                                   \n\t"\
-      "  # insert your code here          \n\t"\
-      "                                   \n\t"\
-      "  #if thread is already inside yield\n\t"\
-			"  cmp $0, %gs:"STR(core_offset_preempt+0)"  \n\t"\
-			"  je "STR(Inter_handler)"          \n\t"\
-      "  jmp iret_toring0                 \n\t"\
-			"                                   \n\t"\
-			"  "STR(Inter_handler)":            \n\t"\
-			"  pushl %eax                       \n\t"\
-			"  pushl %ecx                       \n\t"\
-			"  pushl %ebp                       \n\t"\
-			"                                   \n\t"\
-			"                                   \n\t"\
-      "  movl %esp, %ebp                  \n\t"\
-      "  subl $512, %esp                  \n\t"\
-      "  andl $0xfffffff0, %esp           \n\t"\
-      "  FXSAVE (%esp)                    \n\t"\
-      "  PUSHF               			        \n\t"\
-      "  #set interrupt enable flag   		\n\t"\
-      "  STI                              \n\t"\
-			"  pushl $1f  #restore handler      \n\t"\
-			"                                   \n\t"\
-			"  #store esp to core.preempt_t     \n\t"\
-			"  #calling stackrestore            \n\t"\
-			"  movl %esp, %gs:" STR(core_offset_preempt+4)"      \n\t"\
-			"  movl %gs:" STR(core_offset_mainstack) ", %esp      \n\t"\
-      "                                   \n\t"\
-      "  ret #switch stack                \n\t"\
-      "                                   \n\t"\
-      "  1:                               \n\t"\
-			"  POPF				                      \n\t"\
-      "  FXRSTOR (%esp)                      \n\t"\
-      "  movl %ebp, %esp                  \n\t"\
-      "  popl %ebp                        \n\t"\
-			"  popl %ecx                        \n\t"\
-			"  popl %eax                        \n\t"\
-      "  jmp iret_toring0                 \n\t"\
-      )                                        \
+	__asm(                                       \
+		"  .text                            \n\t"\
+		" " STR(_name) ":                   \n\t"\
+		"  pushl %edx                       \n\t"\
+		"  pushl %ecx                       \n\t"\
+		"  pushl %eax                       \n\t"\
+		"  call " STR(_f) "                 \n\t"\
+		"  popl  %eax                       \n\t"\
+		"  popl  %ecx                       \n\t"\
+		"  popl  %edx                       \n\t"\
+		"                                   \n\t"\
+		"  # insert your code here          \n\t"\
+		"                                   \n\t"\
+		"  #if thread is already inside yield\n\t"\
+		"  cmp $0, %gs:"STR(core_offset_preempt+0)"  \n\t"\
+		"  je "STR(Inter_handler)"          \n\t"\
+		"  movl $2, %gs:"STR(core_offset_preempt+0)"  \n\t"\
+		"  jmp iret_toring0                 \n\t"\
+		"                                   \n\t"\
+		"  "STR(Inter_handler)":            \n\t"\
+		"  movl $2, %gs:"STR(core_offset_preempt+0)"  \n\t"\
+		"  pushl %eax                       \n\t"\
+		"  pushl %ecx                       \n\t"\
+		"  pushl %ebp                       \n\t"\
+		"                                   \n\t"\
+		"                                   \n\t"\
+		"  movl %esp, %ebp                  \n\t"\
+		"  subl $512, %esp                  \n\t"\
+		"  andl $0xfffffff0, %esp           \n\t"\
+		"  FXSAVE (%esp)                    \n\t"\
+		"  PUSHF               		    \n\t"\
+		"  #set interrupt enable flag       \n\t"\
+		"  STI                              \n\t"\
+		"  pushl $1f  #restore handler      \n\t"\
+		"                                   \n\t"\
+		"  #store esp to core.preempt_t     \n\t"\
+		"  #calling stackrestore            \n\t"\
+		"  movl %esp, %gs:"STR(core_offset_preempt+4)"      \n\t"\
+		"  movl %gs:"STR(core_offset_mainstack)", %esp      \n\t"\
+		"                                   \n\t"\
+		"  ret #switch stack                \n\t"\
+		"                                   \n\t"\
+		"  1:                               \n\t"\
+		"  POPF				                      \n\t"\
+		"  FXRSTOR (%esp)                      \n\t"\
+		"  movl %ebp, %esp                  \n\t"\
+		"  popl %ebp                        \n\t"\
+		"  popl %ecx                        \n\t"\
+		"  popl %eax                        \n\t"\
+		"  jmp iret_toring0                 \n\t"\
+	)                                        \
 
-
-// #  define  _ring0_preempt(_name,_f)            \
-//   __asm(                                       \
-//       "  .text                            \n\t"\
-//       " " STR(_name) ":                   \n\t"\
-//       "  pushl %edx                       \n\t"\
-//       "  pushl %ecx                       \n\t"\
-//       "  pushl %eax                       \n\t"\
-//       "  call " STR(_f) "                 \n\t"\
-//       "  popl  %eax                       \n\t"\
-//       "  popl  %ecx                       \n\t"\
-//       "  popl  %edx                       \n\t"\
-//       "                                   \n\t"\
-//       "  # insert your code here          \n\t"\
-//       "                                   \n\t"\
-//       "                                   \n\t"\
-//       "  jmp iret_toring0                 \n\t"\
-//       )                                        \
-
-			// "  movl %esp,	%gs:" STR(core_offset_preempt+)"%edx   \n\t"\
