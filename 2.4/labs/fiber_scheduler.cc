@@ -144,8 +144,8 @@ void int_to_string_write3(char* arr, int n)
 void pfactorsf3_preemptive(shellstate_t* pshellstate, int* pn, addr_t* pmain_stack, addr_t* pf_stack)
 {
 	/*
-		finds the nth prime,implemented
-		using fibers and stores the answer
+		finds the nth prime,implemented 
+		using fibers and stores the answer 
 		to shellstate's output variable
 	*/
 	int output_iterator = 0;
@@ -160,7 +160,7 @@ void pfactorsf3_preemptive(shellstate_t* pshellstate, int* pn, addr_t* pmain_sta
 		{
 			// store the output
 			num_digits = get_num_digit3(i);
-
+			
 			if((output_iterator + num_digits+2 == 80))	break;
 			int_to_string_write3(pshellstate->fiber_output[pshellstate->head] + output_iterator, i);
 			output_iterator += 1 + num_digits;
@@ -172,55 +172,51 @@ void pfactorsf3_preemptive(shellstate_t* pshellstate, int* pn, addr_t* pmain_sta
 	pshellstate->fiber_isDone[pshellstate->head] = true;
 }
 
-void nth_prime3(shellstate_t* pshellstate, int* pn, addr_t* pmain_stack, addr_t* pf_stack)
+void nth_prime3(shellstate_t* pshellstate, int* pn, addr_t* pmain_stack, addr_t* pf_stack, preempt_t* ppreempt)
 {
 	/*
-		finds the nth prime,implemented
-		using fibers and stores the answer
+		finds the nth prime,implemented 
+		using fibers and stores the answer 
 		to shellstate's output variable
 	*/
-
+	
 	pshellstate->fiber_isFirst[pshellstate->head] = false;
-
+	
 	shellstate_t& shellstate = *pshellstate;
 	int n = *pn;
 	addr_t& main_stack = *pmain_stack;
 	addr_t& f_stack = *pf_stack;
+	preempt_t& preempt = *ppreempt;
 
 	int prime_count = 0;
 	int i=1;
-
 	while(prime_count != n)
 	{
 		i++;
 		// check if i is not prime
-		int j =2;
-		for(j=2; j<i; j++)
-		{
-			if(i%j == 0)
-			{
-				break;
-			}
-		}
-		//i is prime
-		if(j==i)
-			prime_count++;
+		int j;
+		for(j=2; j<i; j++)	if(i%j == 0)	break;
+		if(j<i)			continue;
+		// i is prime
+		prime_count++;
 	}
 
 	// store the output
 	int output_iterator = 0;
 	int num_digits = get_num_digit3(i);
-
+	
 	int_to_string_write3(pshellstate->fiber_output[pshellstate->head] + output_iterator, i);
 	output_iterator += 1 + num_digits;
 	pshellstate->fiber_output[pshellstate->head][output_iterator-1] = ' ';
 	pshellstate->fiber_output[pshellstate->head][output_iterator] = '\0';
-
+	
 	pshellstate->fiber_isFirst[pshellstate->head] = true;
 	pshellstate->fiber_isDone[pshellstate->head] = true;
 
-	//REMOVE THIS
-	while(1) stack_saverestore(*pf_stack, *pmain_stack);
+	hoh_debug("calculation done...");
+	hoh_debug("ans: " << i);
+	preempt.flag = 1;
+	stack_saverestore(f_stack, main_stack);
 }
 
 void pfactorsf3(shellstate_t* pshellstate, int* pn, addr_t* pmain_stack, addr_t* pf_stack, preempt_t* ppreempt)
@@ -230,9 +226,9 @@ void pfactorsf3(shellstate_t* pshellstate, int* pn, addr_t* pmain_stack, addr_t*
 		implemented using fibers and stores
 		all the answer to shellstate's
 		output vatiable
-	*/
-	pshellstate->fiber_isFirst[pshellstate->head] = false;
+	*/	
 	int output_iterator = 0;
+	pshellstate->fiber_isFirst[pshellstate->head] = false;
 	int i=2, j=2, num_digits;
 	for(i=2; i<= *pn; i++)
 	{
@@ -243,7 +239,7 @@ void pfactorsf3(shellstate_t* pshellstate, int* pn, addr_t* pmain_stack, addr_t*
 		{
 			// store the output
 			num_digits = get_num_digit3(i);
-
+			
 			if((output_iterator + num_digits+2 == 80))	break;
 			int_to_string_write3(pshellstate->fiber_output[pshellstate->head] + output_iterator, i);
 			output_iterator += 1 + num_digits;
@@ -260,14 +256,30 @@ void pfactorsf3(shellstate_t* pshellstate, int* pn, addr_t* pmain_stack, addr_t*
 	stack_saverestore(*pf_stack, *pmain_stack);
 }
 
+void removeThis(int flag, char* string)
+{
+	if(flag == 0)	hoh_debug(string << "flag is 0");
+	if(flag == 1)	hoh_debug(string << "flag is 1");
+	if(flag == 2)	hoh_debug(string << "flag is 2");
+}
+
 void shell_step_fiber_scheduler(shellstate_t& shellstate, addr_t& main_stack, preempt_t& preempt, addr_t stackptrs[], size_t stackptrs_size, addr_t arrays, size_t arrays_size, dev_lapic_t& lapic)
 {
+	/*
+	// convention	flag	semantics
+	//		0	f_stack
+	//		1	main_stack and timer set
+	//		2	main_stack and timer not set
+	*/
+
+
 	if (shellstate.mode == 3)
 	{
 		//Local variables as per head
-		//0-5 -> 6 f_stacks
-		addr_t& f_stack = stackptrs[shellstate.head];
-//		addr_t& main_stack = stackptrs[0];
+		//stack_init4(f_stack, &f_array, f_arraysize, &pfactorsf3, &shellstate, &n, &main_stack, &f_stack);
+		//1 -> main_stack
+		//2-7 -> 6 f_stacks
+		addr_t& f_stack = stackptrs[1+shellstate.head];
 		size_t f_arraysize = arrays_size/shellstate.FIBER_SIZE;
 		addr_t f_array = arrays + (shellstate.head)*(f_arraysize);
 
@@ -275,9 +287,10 @@ void shell_step_fiber_scheduler(shellstate_t& shellstate, addr_t& main_stack, pr
 		{
 			// get the number of arguments
 			int num_arguments = 0;
-
-			for(	num_arguments=0x0; !equal_to3(shellstate.fiber_arguments[shellstate.head][num_arguments], "", 1) &&
-				num_arguments <= 0x9;
+			
+			for(	num_arguments=0x0; 
+				!equal_to3(shellstate.fiber_arguments[shellstate.head][num_arguments], "", 1) && 
+				num_arguments <= 0x9; 
 				num_arguments++)
 			{}
 
@@ -318,44 +331,42 @@ void shell_step_fiber_scheduler(shellstate_t& shellstate, addr_t& main_stack, pr
 				}
 				else
 				{
-					// set the timer iff
-					// 	1) path == timer interrupt and
-					// 	2) atleast one fiber running:
-					// 		always true if control comes here
-					if(preempt.flag == 0)
-					{
-						lapic.reset_timer_count(shellstate.cut_off_time);
-						f_stack = preempt.f_stack;
-						preempt.flag = 1;
-					}
-
-
 					// for the first time initialize the fstack
 					if(shellstate.fiber_isFirst[shellstate.head])
 					{
 						if(shellstate.head >= 0 && shellstate.head < 3)
 						{
 							shellstate.g_count++;
-							stack_init5(	f_stack, f_array, f_arraysize, &pfactorsf3,
+							stack_init5(	f_stack, f_array, f_arraysize, &pfactorsf3, 
 									&shellstate, &n, &main_stack, &f_stack, &preempt);
 						}
 						else if(shellstate.head >= 3 && shellstate.head<6)
 						{
 							shellstate.h_count++;
-							stack_init4(	f_stack, f_array, f_arraysize,
-									&nth_prime3, &shellstate,
-									&n, &main_stack, &f_stack);
+							stack_init5(	f_stack, f_array, f_arraysize, 
+									&nth_prime3, &shellstate, 
+									&n, &main_stack, &f_stack, &preempt);
 						}
 					}
 
-					// cases if control flow is coming from
-					// 1) timer interrupt		flag = 0
-					// 2) traditional saverestore	flag = 1
+					if(preempt.flag == 2)
+					{
+						hoh_debug("setting the timer...");
+						lapic.reset_timer_count(shellstate.cut_off_time);
+						preempt.flag = 1;
+					}
+
 					preempt.flag = 0;
 					stack_saverestore(main_stack, f_stack);
 
+					if(preempt.flag == 2)
+					{
+						hoh_debug("f_stack to main_stack via interrupt handler...");
+						f_stack = preempt.f_stack;
+					}
 					if(shellstate.fiber_isDone[shellstate.head])
 					{
+						hoh_debug("in main_stack calculation done...");
 						// calculation done, enable the output
 						shellstate.enable_output = 0x1;
 						copy_fiber_output(shellstate, shellstate.head);
@@ -382,13 +393,11 @@ void shell_step_fiber_scheduler(shellstate_t& shellstate, addr_t& main_stack, pr
 		//CHANGING MODE TO ZERO
 		bool to_zero = true;
 		for(int i=0; i<shellstate.FIBER_SIZE; i++)
-		{
-			if(!shellstate.fiber_isDone[i])
-			{
-				to_zero = false;
+			if(!shellstate.fiber_isDone[i]) 
+			{ 
+				to_zero = false; 
 				break;
 			}
-		}
 		if(to_zero)
 		{
 			shellstate.mode = 0x0;
